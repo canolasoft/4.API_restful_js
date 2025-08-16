@@ -36,22 +36,11 @@ switch ($method) {
 			// Añade un nuevo usuario
 			$data = json_decode(file_get_contents('php://input'), true);
 			$result = $usuarioObj->addUsuario($data);
-			if ($result === true) {
-				http_response_code(201);
-				echo json_encode(['success' => $result]);
-			}else{
-				http_response_code(400);
-				echo json_encode(['error' => 'Datos incompletos o error al registrar usuario']);
-			}
+			echo $result;
 		}elseif ($endpoint === '/login') {
 			$data = json_decode(file_get_contents('php://input'), true);
-			$result = $usuarioObj->loginUsuario($data['usr_email'], $data['usr_pass']);
-			if ($result != false) {
-				echo json_encode(['success' => true, 'usuario' => $result]);
-			} else {
-				http_response_code(401);
-				echo json_encode(['error' => 'Credenciales incorrectas']);
-			}
+			$result = $usuarioObj->loginUsuario($data);
+			echo $result;
 		}
 		break;
 	case 'PUT':
