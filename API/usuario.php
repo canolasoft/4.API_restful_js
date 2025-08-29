@@ -39,8 +39,7 @@ class Usuario
 		return $usuario;
 	}
 	// Agregar un nuevo usuario
-	public function addUsuario($data)
-	{
+	public function addUsuario($data){
 		if(!isset($data['usr_name']) || !isset($data['imagen']) || !isset($data['usr_email']) || !isset($data['usr_pass'])) {
 			http_response_code(400);
 			return json_encode(["error" => "Datos incompletos"]);
@@ -85,8 +84,7 @@ class Usuario
 	}
 
 	// Iniciar sesión de usuario
-	public function loginUsuario($data)
-	{
+	public function loginUsuario($data){
 		if(!isset($data['usr_email']) || !isset($data['usr_pass'])) {
 			http_response_code(400);
 			return json_encode(["error" => "Datos incompletos"]);
