@@ -12,65 +12,85 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container bg-dark text-light rounded-3 p-5 mt-3">
-
-        <!------------------------------------------------------------------------------------------>
-        <!-- Lista de usuarios -->
-        <!------------------------------------------------------------------------------------------>
-        <div class="col-lg-10 mx-auto">
-            <h1>Lista de usuarios</h1>
-            <div id="testBody" class="row rounded mx-auto m-4 text-center"></div>
+    <div class="container bg-dark text-light rounded-3 p-5 my-3">
+        <div class="row">
+            <div class="col-lg-10 mx-auto text-center">
+                <h1>Prueba de API</h1>
+                <p>Esta página es una prueba para consumir la API creada en PHP. Aquí puedes registrar nuevos usuarios, iniciar sesión y ver la lista de usuarios registrados.</p>
+                <button class="btn btn-primary m-2" onclick="showformRegistro()">Registrar nuevo usuario</button>
+                <button class="btn btn-secondary m-2" onclick="showformLopgin()">Iniciar sesión</button>
+            </div>
         </div>
 
-        <hr>
+        <div class="row">
+            <!------------------------------------------------------------------------------------------>
+            <!-- Lista de usuarios -->
+            <!------------------------------------------------------------------------------------------>
+            <div class="col-lg-6 mx-auto">
+                <h1>Lista de usuarios</h1>
+                <div id="testBody" class="row rounded mx-auto m-4 text-center"></div>
+            </div>
 
-        <!------------------------------------------------------------------------------------------>
-        <!-- FORMULARIOS -->
-        <!------------------------------------------------------------------------------------------>
-        <!-- Formulario para añadir un nuevo usuario -->
-        <form id="uploadForm" class="my-4 bg-light text-dark p-4 rounded col-lg-6 mx-auto" enctype="multipart/form-data" method="POST">
-            <h1>Registro de usuarios</h1>
-            <div class="mb-3">
-                <label for="usr_name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="usr_name" name="usr_name" required>
-            </div>
-            <div class="mb-3">
-                <label for="usr_email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="usr_email" name="usr_email" required>
-            </div>
-            <div class="mb-3">
-                <label for="usr_pass" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="usr_pass" name="usr_pass" required>
-            </div>
-            <div class="mb-3">
-                <label for="imagen" class="form-label">Imagen</label>
-                <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
-            </div>
-            <div class="row">
-                <button type="submit" class="btn btn-primary col-lg-4 mx-auto mt-3">Registrar usuario</button>
-            </div>
-        </form>
+            <div class="col-lg-6 mx-auto">
+                <!------------------------------------------------------------------------------------------>
+                <!-- FORMULARIOS -->
+                <!------------------------------------------------------------------------------------------>
+                <!-- Formulario para añadir un nuevo usuario -->
+                <form id="uploadForm" class="d-none my-4 bg-light text-dark p-4 rounded mx-auto" enctype="multipart/form-data" method="POST">
+                    <h1 class="text-center">Registro de usuarios</h1>
+                    <div class="mb-3">
+                        <label for="usr_name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="usr_name" name="usr_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="usr_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="usr_email" name="usr_email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="usr_pass" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="usr_pass" name="usr_pass" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary col-lg-4 mx-auto mt-3">Registrar usuario</button>
+                    </div>
+                </form>
 
-        <hr>
-
-        <!-- Formulario para iniciar sesión -->
-        <form id="loginForm" class="my-4 bg-light text-dark p-4 rounded col-lg-6 mx-auto" method="POST">
-            <h1 class="text-center">Iniciar sesión</h1>
-            <div class="mb-3">
-                <label for="usr_email_login" class="form-label">Email</label>
-                <input type="email" class="form-control" id="usr_email_login" name="usr_email_login" required>
-                <label for="usr_pass_login" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="usr_pass_login" name="usr_pass_login" required>
-                <div class="row">
-                    <button type="submit" class="btn btn-primary col-lg-4 mx-auto mt-3">Iniciar sesión</button>
-                </div>
+                <!-- Formulario para iniciar sesión -->
+                <form id="loginForm" class="my-4 bg-light text-dark p-4 rounded mx-auto" method="POST">
+                    <h1 class="text-center">Iniciar sesión</h1>
+                    <div class="mb-3">
+                        <label for="usr_email_login" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="usr_email_login" name="usr_email_login" required>
+                        <label for="usr_pass_login" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="usr_pass_login" name="usr_pass_login" required>
+                        <div class="row">
+                            <button type="submit" class="btn btn-primary col-lg-4 mx-auto mt-3">Iniciar sesión</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
 
     <!------------------------------------------------------------------------------------------>
     <!-- SCRIPTS -->
     <!------------------------------------------------------------------------------------------>
+    <!-- Mostrar / ocultar formularios -->
+    <script>
+        function showformRegistro() {
+            document.getElementById('uploadForm').classList.remove('d-none');
+            document.getElementById('loginForm').classList.add('d-none');
+        }
+
+        function showformLopgin() {
+            document.getElementById('loginForm').classList.remove('d-none');
+            document.getElementById('uploadForm').classList.add('d-none');
+        }
+    </script>
+
     <!-- Solicitud POST para añadir un nuevo usuario a la API -->
     <script>
         document.getElementById('uploadForm').addEventListener('submit', function(e) {

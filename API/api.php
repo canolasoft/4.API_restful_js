@@ -43,26 +43,9 @@ switch ($method) {
 			echo $result;
 		}
 		break;
-	case 'PUT':
-		if (preg_match('/^\/usuarios\/(\d+)$/', $endpoint, $matches)) {
-			// Actualiza un usuario por ID
-			$usuarioId = $matches[1];
-			parse_str(file_get_contents('php://input'), $data);
-			$result = $usuarioObj->updateUsuario($usuarioId, $data);
-			echo json_encode(['success' => $result]);
-		}
-		break;
-	case 'DELETE':
-		if (preg_match('/^\/usuarios\/(\d+)$/', $endpoint, $matches)) {
-			// Elimina un usuario por ID
-			$usuarioId = $matches[1];
-			$result = $usuarioObj->deleteUsuario($usuarioId);
-			echo json_encode(['success' => $result]);
-		}
-		break;
 	default:
 		// Maneja métodos no permitidos
-		header('Allow: GET, POST, PUT, DELETE');
+		header('Allow: GET, POST');
 		http_response_code(405);
 		echo json_encode(['error' => 'Método no permitido']);
 		break;

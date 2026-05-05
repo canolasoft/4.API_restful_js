@@ -19,7 +19,7 @@ class Usuario
 	}
 
 	// Métodos para manejar usuarios
-	// Obtener todos los usuarios
+	// Obtener todos los usuarios (método GET, endopoint: /usuarios)
 	public function getAllUsuarios()
 	{
 		$query = "SELECT * FROM usuario";
@@ -30,7 +30,7 @@ class Usuario
 		}
 		return $usuarios;
 	}
-	// Obtener un usuario por ID
+	// Obtener un usuario por ID  (método GET, endopoint: /usuarios/<id>)
 	public function getUsuarioById($id)
 	{
 		$query = "SELECT * FROM usuario WHERE id = $id ";
@@ -38,7 +38,7 @@ class Usuario
 		$usuario = mysqli_fetch_assoc($result);
 		return $usuario;
 	}
-	// Agregar un nuevo usuario
+	// Agregar un nuevo usuario (método POST, endopoint: /usuarios)
 	public function addUsuario($data){
 		if(!isset($data['usr_name']) || !isset($data['imagen']) || !isset($data['usr_email']) || !isset($data['usr_pass'])) {
 			http_response_code(400);
@@ -83,7 +83,7 @@ class Usuario
 		}
 	}
 
-	// Iniciar sesión de usuario
+	// Iniciar sesión de usuario (método POST, endopoint: /login)
 	public function loginUsuario($data){
 		if(!isset($data['usr_email']) || !isset($data['usr_pass'])) {
 			http_response_code(400);
@@ -107,32 +107,6 @@ class Usuario
 				http_response_code(400);
 				return json_encode(["error" => "Usuario no encontrado"]);
 			}
-		}
-	}
-
-	// Actualizar un usuario por ID
-	public function updateUsuario($id, $data)
-	{
-		$usr_name = $data['usr_name'];
-		$usr_email = $data['usr_email'];
-		$usr_pass = $data['usr_pass'];
-		$query = "UPDATE usuario SET usr_name = '$usr_name', usr_email = '$usr_email', usr_pass = '$usr_pass' WHERE id = ".$id;
-		$result = mysqli_query($this->conn, $query);
-		if($result){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	// Eliminar un usuario por ID
-	public function deleteUsuario($id)
-	{
-		$query = "DELETE FROM usuario WHERE id = ".$id;
-		$result = mysqli_query($this->conn, $query);
-		if($result){
-			return true;
-		} else {
-			return false;
 		}
 	}
 }
